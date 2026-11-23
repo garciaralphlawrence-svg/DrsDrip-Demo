@@ -532,3 +532,22 @@ cite{display:block;font-family:var(--sans);font-style:normal;font-size:11px;lett
   .bsteps li{font-size:9.5px;letter-spacing:.08em}
   .slot-grid{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ---------- phone polish ---------- */
+@media (max-width:640px){
+  .brand small{font-size:10.5px;letter-spacing:.24em}
+  .hero-meta span,.tile figcaption span,.countdown span,.price .tag,.float-book small{font-size:11.5px}
+  .status{font-size:11px}
+  .float-book{right:auto;left:14px;bottom:16px;padding:12px 18px;border-radius:999px}
+  .float-book small{display:none}
+  .drip-btn,.tcard button,.price button,.branch .bk{display:inline-block;padding:12px 0 4px}
+  .branch .meta a{display:inline-block;padding:8px 0}
+  .branch .meta{align-items:center}
+  .foot nav a,.foot-contact a{display:inline-block;padding:8px 0}
+  .bopt{flex-direction:column;align-items:flex-start;gap:6px}
+  .bopt>small{text-align:left}
+  .bopt>small br{display:none}
+  .bsteps li{font-size:10px}
+  .send-row .btn{flex:1 1 40%}
+  .hero-meta{padding-right:60px}
+}

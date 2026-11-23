@@ -199,7 +199,7 @@
   const bm = $('#book'), B = { branch: null, service: null, date: null, time: null, step: 0 };
   const sel = $('#bService');
   sel.innerHTML = Object.entries(SERVICES).map(([g, list]) => `<optgroup label="${g}">${list.map(s => `<option>${esc(s)}</option>`).join('')}</optgroup>`).join('');
-  $('#bBranches').innerHTML = BRANCHES.map(b => `<button type="button" class="bopt" data-id="${b.id}"><span><b>${b.name}</b><small>${b.addr}</small></span><small>Tue–Sun<br>${fmtH(b.open)}–${fmtH(b.close)}</small></button>`).join('');
+  $('#bBranches').innerHTML = BRANCHES.map(b => `<button type="button" class="bopt" data-id="${b.id}"><span><b>${b.name}</b><small>${b.addr}</small></span><small>Tue–Sun<br> ${fmtH(b.open)}–${fmtH(b.close)}</small></button>`).join('');
   $('#bBranches').addEventListener('click', e => { const o = e.target.closest('.bopt'); if (!o) return; B.branch = o.dataset.id; $$('.bopt').forEach(x => x.classList.toggle('on', x === o)); B.time = null; refreshNav(); setTimeout(() => go(1), 250); });
   sel.addEventListener('change', () => { B.service = sel.value; refreshNav(); });
 
