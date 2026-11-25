@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body class="is-loading">
 
@@ -26,8 +26,6 @@
     <p class="loader-sub"><span>The 1st IV Drip Lounge</span><span>in the Philippines</span></p>
   </div>
   <div class="loader-drop"></div>
-  <div class="loader-count"><span id="loadCount">0</span>%</div>
-  <p class="loader-since">Since 2013</p>
 </div>
 
 <div class="ivline" aria-hidden="true"><span class="ivfill"></span><span class="ivdrop"></span></div>
@@ -53,40 +51,31 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <canvas id="bubbles" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div class="hero-copy">
-      <p class="kicker hero-kicker"><span>(Since 2013)</span><span>—</span><span>13 years of wellness</span></p>
+      <p class="kicker hero-kicker"><span>The 1st IV Drip Lounge in the Philippines</span></p>
       <h1 class="hero-title" id="heroTitle">
-        <span class="ln">The <em>first</em> IV</span>
-        <span class="ln">drip lounge in</span>
-        <span class="ln">the Philippines.</span>
+        <span class="ln">13 years of trust,</span>
+        <span class="ln">wellness that</span>
+        <span class="ln"><em>lasts.</em></span>
       </h1>
-      <p class="lead hero-lede">Drips, skin and wellness care, guided by physicians. Relax in the lounge in Quezon City or Mandaluyong, and leave feeling your best.</p>
+      <p class="lead hero-lede">IV drips, skin and body treatments, and a doctor who sees you first. Drop by our lounges on Timog Avenue, Capitol Hills and SOHO Central.</p>
       <div class="hero-ctas hero-cta">
         <button class="btn btn-solid magnetic" data-book><span class="btn-t">Book a visit</span><span class="arr">→</span></button>
         <button class="btn btn-line magnetic" data-chat><span class="btn-t">Ask Dr. Drip</span></button>
       </div>
-      <ul class="hero-meta hero-bar">
-        <li><b>130K</b><span>Facebook community</span></li>
-        <li><b>94%</b><span>recommend · 230 reviews</span></li>
-        <li><b>3</b><span>lounges in Metro Manila</span></li>
-      </ul>
+      <p class="hero-note hero-bar">Open Tuesday to Sunday · <a href="tel:+639178964599">0917 896 4599</a></p>
     </div>
 
     <div class="hero-visual">
       <div class="hero-arch" id="heroMedia">
         <img src="assets/img/c-reception.webp" alt="The Drs'. Drip reception with its green logo wall" width="540" height="691">
       </div>
-      <div class="hero-bag" id="heroBag"><div class="dbag" data-c1="#f7ecd0" data-c2="#d9b25c" data-label="DRS'. DRIP" data-id="hero"></div></div>
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100 100 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0"/></defs>
-          <text><textPath href="#circ">The 1st IV Drip Lounge · Since 2013 · Thirteenth Edition · </textPath></text></svg>
-        <b>13</b>
-      </div>
+      <figure class="mark"><img src="assets/img/mark-13.webp" alt="Drs'. Drip 13 years anniversary: 13 years of trust, wellness that lasts" width="380" height="490"></figure>
+      <p class="hero-cap">Our Timog Avenue lounge</p>
     </div>
   </div>
-  <a href="#story" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><i></i></a>
+  <a href="#story" class="scroll-cue" aria-label="Scroll down"><i></i></a>
 </section>
 
 <!-- VELOCITY MARQUEE -->
@@ -101,8 +90,8 @@
 <!-- STORY -->
 <section class="story" id="story">
   <div class="wrap">
-    <p class="label">(01) — Our story</p>
-    <p class="big-quote" id="bigQuote">In 2013 we opened the country's first IV drip lounge. Thirteen years later we're three lounges and a team you've trusted for over a decade, and every visit still starts the same way: a physician checks you first.</p>
+    <p class="label">Our story</p>
+    <p class="big-quote" id="bigQuote">We opened the first IV drip lounge in the Philippines in 2013, right here on Timog Avenue. Thirteen years later there are three of us, and one rule hasn't changed: a doctor sees you before any drip.</p>
   </div>
   <figure class="wrap team reveal-mask">
     <img src="assets/img/team.webp" alt="The Drs'. Drip team celebrating 13 years" width="960" height="365" loading="lazy">
@@ -110,7 +99,7 @@
   <div class="wrap stat-row">
     <div><b data-count="13">13</b><span>years since 2013</span></div>
     <div><b data-count="130" data-suf="K">130K</b><span>community on Facebook</span></div>
-    <div><b data-count="94" data-suf="%">94%</b><span>would recommend us</span></div>
+    <div><b data-count="94" data-suf="%">94%</b><span>recommend us · 230 reviews</span></div>
     <div><b data-count="3">3</b><span>lounges in Metro Manila</span></div>
   </div>
 </section>
@@ -120,15 +109,15 @@
   <div class="drips-pin" id="dripPin">
     <div class="drips-track" id="dripTrack">
       <div class="d-intro">
-        <p class="label light">(02) — Signature IV drips</p>
+        <p class="label light">Signature IV drips</p>
         <h2 class="split">Find your drip.</h2>
-        <p class="body light">Our best-known formulations. A physician checks you first and confirms which drip suits you.</p>
+        <p class="body light">The drips our regulars keep coming back for. Not sure which one? Our doctor will tell you after a quick assessment.</p>
         <p class="d-hint"><span>Keep scrolling</span><i></i></p>
       </div>
       <article class="d-panel" style="--c1:#f7ecd0;--c2:#d9b25c">
-        <div class="d-bag"><div class="dbag" data-c1="#f7ecd0" data-c2="#d9b25c" data-label="PLATINUM" data-id="d1"></div></div>
+        <figure class="d-img"><img src="assets/img/p-gluta.webp" alt="Beyond the glow: understanding glutathione" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">01 / 06 · Glutathione-focused</p>
+          <p class="d-num">1 / 06 · Glutathione-focused</p>
           <h3>Platinum Ultra White</h3>
           <p>High glutathione content for antioxidant support, made with brighter, more luminous-looking skin in mind.</p>
           <ul><li>High glutathione</li><li>Antioxidant support</li><li>Brightening goals</li></ul>
@@ -136,9 +125,9 @@
         </div>
       </article>
       <article class="d-panel" style="--c1:#f9e3d6;--c2:#e2a98a">
-        <div class="d-bag"><div class="dbag" data-c1="#f9e3d6" data-c2="#e2a98a" data-label="CINDERELLA" data-id="d2"></div></div>
+        <figure class="d-img"><img src="assets/img/p-ingredients.webp" alt="Platinum Ultra White and Royal Cinderella ingredients" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">02 / 06 · Multi-ingredient</p>
+          <p class="d-num">2 / 06 · Multi-ingredient</p>
           <h3>Royal Cinderella</h3>
           <p>Vitamin C and glutathione together, for antioxidant support and a refreshed, glowing look.</p>
           <ul><li>Vitamin C</li><li>Glutathione</li><li>Formulation boosters</li></ul>
@@ -146,9 +135,9 @@
         </div>
       </article>
       <article class="d-panel" style="--c1:#dcefe5;--c2:#5fa889">
-        <div class="d-bag"><div class="dbag" data-c1="#dcefe5" data-c2="#5fa889" data-label="MYERS' PLUS" data-id="d3"></div></div>
+        <figure class="d-img"><img src="assets/img/p-23sessions.webp" alt="23-session prices for Platinum, Cinderella and Myers' Plus" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">03 / 06 · Classic wellness</p>
+          <p class="d-num">3 / 06 · Classic wellness</p>
           <h3>Myers' Plus Drip</h3>
           <p>Our take on the classic vitamin-and-mineral drip, for people who want to feel recharged.</p>
           <ul><li>Vitamins</li><li>Minerals</li><li>Hydration</li></ul>
@@ -156,9 +145,9 @@
         </div>
       </article>
       <article class="d-panel" style="--c1:#e6ebf6;--c2:#8ea3d1">
-        <div class="d-bag"><div class="dbag" data-c1="#e6ebf6" data-c2="#8ea3d1" data-label="NAD+" data-id="d4"></div></div>
+        <figure class="d-img"><img src="assets/img/p-nad.webp" alt="NAD Ultimate Drip" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">04 / 06 · Cellular energy</p>
+          <p class="d-num">4 / 06 · Cellular energy</p>
           <h3>NAD Ultimate Drip</h3>
           <p>NAD+ is a coenzyme your cells use to make energy. Ask our medical team if it's right for you.</p>
           <ul><li>NAD+</li><li>Cellular energy</li><li>Healthy-aging support</li></ul>
@@ -166,9 +155,9 @@
         </div>
       </article>
       <article class="d-panel" style="--c1:#f7e2e8;--c2:#d593a6">
-        <div class="d-bag"><div class="dbag" data-c1="#f7e2e8" data-c2="#d593a6" data-label="RADIANCE" data-id="d5"></div></div>
+        <figure class="d-img"><img src="assets/img/p-youthful.webp" alt="Youthful Radiance" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">05 / 06 · Skin radiance</p>
+          <p class="d-num">5 / 06 · Skin radiance</p>
           <h3>Youthful Radiance</h3>
           <p>Our formulation with placenta extract and collagen, made to support skin renewal and a youthful glow.</p>
           <ul><li>Placenta extract</li><li>Collagen</li><li>Skin renewal</li></ul>
@@ -176,9 +165,9 @@
         </div>
       </article>
       <article class="d-panel" style="--c1:#fde9c8;--c2:#f0a94a">
-        <div class="d-bag"><div class="dbag" data-c1="#fde9c8" data-c2="#f0a94a" data-label="REGEN C" data-id="d6"></div></div>
+        <figure class="d-img"><img src="assets/img/p-regenc.webp" alt="Regen C Cellular Renewal" loading="lazy" width="472" height="590"></figure>
         <div class="d-body">
-          <p class="d-num">06 / 06 · Cellular renewal</p>
+          <p class="d-num">6 / 06 · Cellular renewal</p>
           <h3>Regen C</h3>
           <p>A physician-guided vitamin C drip to support your body's natural renewal.</p>
           <ul><li>High-dose vitamin C</li><li>Antioxidant support</li><li>Cellular renewal</li></ul>
@@ -190,53 +179,28 @@
   </div>
 </section>
 
-<!-- KEY DIFFERENCE (their own poster motif) -->
-<section class="vs" id="vs">
-  <div class="wrap vs-head">
-    <p class="label">(03) — Key difference</p>
-    <h2 class="split">Platinum or Cinderella?</h2>
-  </div>
-  <div class="wrap vs-grid">
-    <article class="vs-card">
-      <div class="vs-bag"><div class="dbag" data-c1="#f6eb9a" data-c2="#e6cf3a" data-label="PLATINUM" data-id="v1"></div></div>
-      <div>
-        <h3>Platinum Ultra White</h3>
-        <p class="vs-sub">Glutathione-focused</p>
-        <ul><li>High glutathione content</li><li>Antioxidant support</li><li>Formulated with complexion-brightening goals in mind</li></ul>
-        <button data-book data-pick="Platinum Ultra White">Book Platinum →</button>
-      </div>
-    </article>
-    <div class="vs-or" aria-hidden="true">or</div>
-    <article class="vs-card">
-      <div class="vs-bag"><div class="dbag" data-c1="#f3f1ec" data-c2="#dfd9cc" data-label="CINDERELLA" data-id="v2"></div></div>
-      <div>
-        <h3>Royal Cinderella</h3>
-        <p class="vs-sub">Multi-ingredient approach</p>
-        <ul><li>Vitamin C</li><li>Glutathione</li><li>Other formulation-specific boosters may be included</li><li>For a brighter, refreshed-looking complexion</li></ul>
-        <button data-book data-pick="Royal Cinderella IV Drip">Book Cinderella →</button>
-      </div>
-    </article>
-  </div>
-  <p class="wrap vs-fine">Not sure? A physician will tell you which one suits you. <button class="txtlink" data-chat>Ask Dr. Drip</button></p>
-</section>
-
-<!-- HOW A VISIT WORKS: pinned bag fills -->
+<!-- HOW A VISIT WORKS: pinned, photos change per step -->
 <section class="visit" id="visit">
   <div class="visit-pin" id="visitPin">
     <div class="wrap visit-in">
       <div class="visit-left">
-        <p class="label light">(04) — How a visit works</p>
-        <h2 class="split">Assess first.<br><em>Treat second.</em></h2>
-        <div class="visit-bag"><div class="dbag" data-c1="#cfeadd" data-c2="#7cc0a2" data-label="YOUR VISIT" data-id="vb"></div></div>
+        <p class="label light">Your first visit</p>
+        <h2 class="split">It starts with <em>understanding you.</em></h2>
+        <div class="vphotos" aria-hidden="true">
+          <img src="assets/img/c-frontdesk.webp" alt="" class="on">
+          <img src="assets/img/doctor-consult.webp" alt="">
+          <img src="assets/img/c-ivnurse.webp" alt="">
+          <img src="assets/img/p-specials.webp" alt="">
+        </div>
       </div>
       <ol class="vsteps" id="vsteps">
-        <li><span class="vn">01</span><div><h3>Book</h3><p>Choose your branch, service and time online, or ask Dr. Drip.</p></div></li>
-        <li><span class="vn">02</span><div><h3>Assess</h3><p>A physician reviews your health, goals and history before anything starts.</p></div></li>
-        <li><span class="vn">03</span><div><h3>Relax</h3><p>Settle into the lounge while our nurses run and watch your drip.</p></div></li>
-        <li><span class="vn">04</span><div><h3>Glow</h3><p>Go home with aftercare tips and a plan for your next visit.</p></div></li>
+        <li><span class="vn">1</span><div><h3>Book</h3><p>Pick a branch and time here, or just message us. Walk-ins are fine when there's a free chair.</p></div></li>
+        <li><span class="vn">2</span><div><h3>See the doctor</h3><p>We go over your health, your goals and any meds you take. If a drip isn't right for you, we'll say so.</p></div></li>
+        <li><span class="vn">3</span><div><h3>Relax</h3><p>Sit back in the lounge while a nurse starts and watches your drip.</p></div></li>
+        <li><span class="vn">4</span><div><h3>Glow</h3><p>Go home with aftercare tips and a plan for your next visit.</p></div></li>
       </ol>
     </div>
-    <p class="wrap visit-note">"All services are subject to medical assessment and physician approval." That's how we've worked for 13 years.</p>
+    <p class="wrap visit-note">All services are subject to medical assessment and physician approval.</p>
   </div>
 </section>
 
@@ -244,7 +208,7 @@
 <section class="treat" id="treatments">
   <div class="wrap head">
     <div>
-      <p class="label">(05) — Beyond the drip</p>
+      <p class="label">Beyond the drip</p>
       <h2 class="split">Skin, face and body care.</h2>
     </div>
     <p class="body fade-up">One goal, different approaches. Our doctors will help you pick the right one.</p>
@@ -280,10 +244,9 @@
 
 <!-- SPECIALS -->
 <section class="specials" id="specials">
-  <div class="ribbon r1" aria-hidden="true"></div><div class="ribbon r2" aria-hidden="true"></div>
   <div class="wrap sp-head">
     <div>
-      <p class="label gold">(06) — The Thirteenth Edition</p>
+      <p class="label gold">The Thirteenth Edition</p>
       <h2 class="split">Up to <em>60% off</em>, until the year ends.</h2>
     </div>
     <div class="countdown fade-up" aria-label="Time left in the anniversary promo">
@@ -327,10 +290,10 @@
 <section class="lounge" id="lounge">
   <div class="wrap head">
     <div>
-      <p class="label">(07) — The lounge</p>
-      <h2 class="split">Calm, clean and <em>very green.</em></h2>
+      <p class="label">The lounge</p>
+      <h2 class="split">A pamper afternoon at <em>the lounge.</em></h2>
     </div>
-    <p class="body fade-up">"The ambiance was very peaceful and clean." That's how one guest described it.</p>
+    <p class="body fade-up">Green walls, comfy chairs and nurses who check on you the whole time. Bring a book, or just nap.</p>
   </div>
   <div class="wrap collage">
     <figure class="cl cl1" data-speed=".12"><div class="cl-img"><img src="assets/img/c-frontdesk.webp" alt="Guests at the Drs'. Drip front desk" loading="lazy"></div><figcaption><b>Front desk</b>Warm welcome, every visit</figcaption></figure>
@@ -358,7 +321,7 @@
 <section class="branches" id="branches">
   <div class="wrap head">
     <div>
-      <p class="label">(08) — Branches &amp; hours</p>
+      <p class="label">Branches &amp; hours</p>
       <h2 class="split">Visit a lounge near you.</h2>
     </div>
     <p class="body fade-up">Open Tuesday to Sunday. Live status uses Philippine time.</p>
@@ -371,10 +334,10 @@
 
 <!-- CTA -->
 <section class="cta">
-  <div class="cta-drops" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap cta-in">
-    <p class="label gold">(09) — Your next visit</p>
-    <h2 class="split">Your next chapter starts with a <em>conversation.</em></h2>
+    <p class="label gold">Your next visit</p>
+    <h2 class="split">Make the most of our <em>anniversary special.</em></h2>
+    <p class="cta-sub">Promos run until December 31, 2026 at all branches.</p>
     <div class="hero-ctas center"><button class="btn btn-gold magnetic" data-book><span class="btn-t">Book a visit</span><span class="arr">→</span></button><button class="btn btn-line light magnetic" data-chat><span class="btn-t">Ask Dr. Drip</span></button></div>
   </div>
 </section>
@@ -470,11 +433,11 @@
   </div>
 </div>
 
-<script src="script.js?v=5"></script>
+<script src="script.js?v=6"></script>
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/SplitText.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="anim.js?v=5"></script>
+<script src="anim.js?v=6"></script>
 </body>
 </html>

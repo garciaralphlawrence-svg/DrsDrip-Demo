@@ -289,7 +289,7 @@
   const allBranches = () => BRANCHES.map(b => { const st = status(b); return `<li><b>${b.name}</b>: ${b.addr}. Tue–Sun, ${fmtH(b.open)}–${fmtH(b.close)}. <i>${st.text}</i></li>`; }).join('');
   const BOOK = (svc, label = 'Book now') => ({ t: label, book: svc || '' });
   const K = [
-    { k: ['hi', 'hello', 'hey', 'kumusta', 'musta', 'good morning', 'good afternoon', 'good evening', 'yo'], a: () => ["Hi! I'm <b>Dr. Drip</b> 💚 I can tell you about our IV drips, skin treatments, promos, branches and hours, or help you book a visit. What would you like to know?"] },
+    { k: ['hi', 'hello', 'hey', 'kumusta', 'musta', 'good morning', 'good afternoon', 'good evening', 'yo'], a: () => ["Hi! I'm <b>Dr. Drip</b> I can tell you about our IV drips, skin treatments, promos, branches and hours, or help you book a visit. What would you like to know?"] },
     { k: ['price', 'prices', 'magkano', 'how much', 'cost', 'presyo', 'rate', 'rates', 'promo', 'promos', 'discount', 'package', 'packages', 'sale', 'anniversary', 'deal', 'deals', 'mura'], w: 0.9, a: () => [`Our <b>13th Anniversary specials</b> run until Dec 31, 2026, with up to 60% off:<ul><li>Platinum Ultra White, 23 sessions: <b>₱85,000</b></li><li>Royal Cinderella, 23 sessions: <b>₱70,000</b></li><li>Myers' Plus Drip, 23 sessions: <b>₱105,000</b></li><li>NAD Ultimate Drip, 15 sessions: <b>₱60,000</b></li><li>Youthful Radiance, 15 sessions: <b>₱39,999</b></li><li>Skin Booster PRP, 4 sessions: <b>₱15,000</b></li></ul>There's also the <b>₱30K Anniversary Edit</b> face combos. For single-session prices, message the team.`, [{ t: 'See all specials', go: '#specials' }, BOOK('', 'Book a visit')]] },
     { k: ['where', 'saan', 'branch', 'branches', 'location', 'address', 'near', 'mandaluyong', 'timog', 'capitol', 'soho', 'shaw', 'qc', 'quezon', 'directions', 'map'], a: () => [`We have 3 branches:<ul>${allBranches()}</ul>`, [{ t: 'Open map', go: '#branches' }, BOOK('', 'Book a visit')]] },
     { k: ['open', 'hours', 'oras', 'bukas', 'sarado', 'closed', 'close', 'monday', 'sunday', 'holiday', 'time', 'anong oras', 'today'], a: () => [`We're open <b>Tuesday to Sunday</b> and closed on Mondays. Here's each branch right now (PH time):<ul>${allBranches()}</ul>`, [BOOK('', 'Book a visit')]] },
@@ -310,10 +310,10 @@
     { k: ['how long', 'gaano katagal', 'tagal', 'minutes', 'duration', 'oras ba'], a: () => ["It depends on the drip or treatment you choose. The team will tell you the exact time when they confirm your booking, so you can plan your day."] },
     { k: ['how often', 'ilang beses', 'sessions', 'session', 'frequency', 'weekly'], a: () => ["Your physician will suggest how often based on your goals. Our packages come in <b>4, 15 or 23 sessions</b>, and the more sessions you choose, the more you save."] },
     { k: ['pay', 'payment', 'gcash', 'card', 'cash', 'bayad', 'credit', 'installment'], a: () => ["Promo packages are priced for <b>cash or card</b> payment. They can't be combined with other promos and aren't transferable. For GCash or other options, please ask the team.", [{ t: 'Ask on WhatsApp', href: 'https://wa.me/639178964599' }]] },
-    { k: ['who', 'about', 'history', 'first', 'since', 'founded', 'story', 'kailan', 'pioneer'], a: () => ["Drs'. Drip Lounge & Infusion Bar <b>pioneered IV drip therapy in the Philippines in 2013</b>, as the 1st IV Drip Lounge in the country. This year we celebrate <b>13 years</b>, with 3 branches and 130K followers. 94% of 230 reviewers recommend us 💚"] },
+    { k: ['who', 'about', 'history', 'first', 'since', 'founded', 'story', 'kailan', 'pioneer'], a: () => ["Drs'. Drip Lounge & Infusion Bar <b>pioneered IV drip therapy in the Philippines in 2013</b>, as the 1st IV Drip Lounge in the country. This year we celebrate <b>13 years</b>, with 3 branches and 130K followers. 94% of 230 reviewers recommend us"] },
     { k: ['doctor', 'doctors', 'physician', 'derma', 'dermatologist', 'nurse', 'nurses', 'staff'], a: () => ["Every treatment is guided by our medical team. A <b>physician assesses and approves</b> each service, and trained nurses run and watch your drip. One guest wrote: “With knowledgeable and experienced dermatologists present, you know you’re in safe hands.”"] },
     { k: ['my booking', 'my appointment', 'booked', 'na book ko'], a: () => { let l = []; try { l = JSON.parse(localStorage.getItem('drsdrip-bookings') || '[]'); } catch {} return l.length ? [`Here's what you requested on this device:<ul>${l.map(x => `<li>${esc(x.service)} · ${esc(x.branch)} · ${esc(x.when)}</li>`).join('')}</ul>The team confirms each one by message.`] : ["I don't see any booking requests from this device yet.", [BOOK('', 'Book a visit')]]; } },
-    { k: ['thanks', 'thank you', 'salamat', 'ty', 'tnx', 'ok', 'okay', 'sige'], a: () => ['You’re welcome! 💚 Anything else I can help with?'] }
+    { k: ['thanks', 'thank you', 'salamat', 'ty', 'tnx', 'ok', 'okay', 'sige'], a: () => ['You’re welcome! Anything else I can help with?'] }
   ];
   const norm = s => ' ' + s.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9+\s-]/g, ' ').replace(/\s+/g, ' ') + ' ';
   function reply(q) {
@@ -351,7 +351,7 @@
   let greeted = false;
   function openChat() {
     chat.hidden = false; fab.style.display = 'none';
-    if (!greeted) { greeted = true; const st = status(BRANCHES[0]); add(`Hi! I'm <b>Dr. Drip</b> 💚, the Drs'. Drip assistant. Ask me about drips, skin treatments, promos, branches or booking.<br><small style="color:#5a6f67">Timog main branch: ${st.text}</small>`); }
+    if (!greeted) { greeted = true; const st = status(BRANCHES[0]); add(`Hi! I'm <b>Dr. Drip</b>, the Drs'. Drip assistant. Ask me about drips, skin treatments, promos, branches or booking.<br><small style="color:#5a6f67">Timog main branch: ${st.text}</small>`); }
     setTimeout(() => $('#chatIn').focus(), 100);
   }
   function closeChat() { chat.hidden = true; fab.style.display = ''; }
