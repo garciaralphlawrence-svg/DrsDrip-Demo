@@ -14,13 +14,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body class="is-loading">
 
 <!-- PRELOADER: the drip fills the screen -->
 <div class="loader" id="loader">
   <video class="loader-video" id="introVid" muted playsinline preload="auto" aria-hidden="true" src="assets/video/intro.mp4"></video>
+  <div class="intro" aria-hidden="true">
+    <canvas class="intro-bg" id="introBg"></canvas>
+    <div class="intro-dust"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="intro-stage">
+      <svg class="intro-ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="98"/></svg>
+      <svg class="intro-ring r2" viewBox="0 0 200 200"><circle cx="100" cy="100" r="98"/></svg>
+      <span class="intro-wave"></span><span class="intro-wave"></span><span class="intro-wave"></span>
+      <canvas class="intro-logo" id="introLogo" width="600" height="540"></canvas>
+    </div>
+    <p class="intro-tag" id="introTag">The 1st IV Drip Lounge in the Philippines</p>
+    <p class="intro-since"><span>Since 2013</span><i></i><span>Thirteenth Edition</span></p>
+    <div class="intro-bar"><i id="introBar"></i></div>
+  </div>
   <button class="skip" id="skipIntro" type="button">Skip intro <span>→</span></button>
   <div class="loader-fill" id="loaderFill" aria-hidden="true"></div>
   <div class="loader-mark" aria-hidden="true">
@@ -443,6 +456,6 @@
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/SplitText.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="anim.js?v=8"></script>
+<script src="anim.js?v=9"></script>
 </body>
 </html>

@@ -68,13 +68,57 @@
     let seen = null; try { seen = sessionStorage.getItem('dd-intro'); } catch (e) {}
     if (vid && !seen) {
       loader.classList.add('has-video');
-      let finished = false;
+      let finished = false, raf = 0, splashed = false;
+      /* background: moving liquid light */
+      const bgc = $('#introBg'), bx = bgc.getContext('2d');
+      const bsize = () => { bgc.width = Math.ceil(innerWidth / 6); bgc.height = Math.ceil(innerHeight / 6); };
+      bsize(); addEventListener('resize', bsize);
+      const BL = [['23,117,94', .75, .6, .3, .3], ['214,186,127', .32, .4, .75, .7], ['166,220,197', .14, .45, .8, .2], ['6,42,33', .9, .55, .15, .85]];
+      /* logo: key out the video's green background, keep the white 3D logo + liquid */
+      const lc = $('#introLogo'), lx = lc.getContext('2d', { willReadFrequently: true });
+      let lastT = -1;
+      const drawLogo = () => {
+        if (vid.readyState < 2 || vid.currentTime === lastT) return; lastT = vid.currentTime;
+        lx.clearRect(0, 0, 600, 540);
+        lx.drawImage(vid, 240, 0, 800, 720, 0, 0, 600, 540);
+        const im = lx.getImageData(0, 0, 600, 540), d = im.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const m = Math.min(d[i], d[i + 1], d[i + 2]);
+          d[i + 3] = m <= 55 ? 0 : m >= 175 ? 255 : (m - 55) * 2.125;
+        }
+        lx.putImageData(im, 0, 0);
+      };
+      const loop = t => {
+        bx.fillStyle = '#0b3f33'; bx.fillRect(0, 0, bgc.width, bgc.height); bx.globalCompositeOperation = 'lighter';
+        BL.forEach(([c, a, r, x0, y0], k) => {
+          const x = (x0 + Math.sin(t / 2600 + k * 1.7) * .12) * bgc.width, y = (y0 + Math.cos(t / 3100 + k) * .12) * bgc.height, rr = r * Math.max(bgc.width, bgc.height);
+          const g = bx.createRadialGradient(x, y, 0, x, y, rr); g.addColorStop(0, `rgba(${c},${a})`); g.addColorStop(1, `rgba(${c},0)`); bx.fillStyle = g; bx.fillRect(0, 0, bgc.width, bgc.height);
+        });
+        bx.globalCompositeOperation = 'source-over';
+        drawLogo();
+        if (vid.duration) {
+          $('#introBar').style.transform = `scaleX(${Math.min(1, vid.currentTime / vid.duration)})`;
+          if (!splashed && vid.currentTime > 5.75) { splashed = true; loader.classList.add('splash'); }
+        }
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+      /* graphics around the logo */
+      const tagCh = window.SplitText ? new SplitText('#introTag', { type: 'words,chars' }).chars : $$('#introTag');
+      gsap.timeline({ delay: .2 })
+        .from('.intro-stage', { scale: .82, opacity: 0, duration: 1.6, ease: 'expo.out' })
+        .fromTo('.intro-ring circle', { strokeDashoffset: 616 }, { strokeDashoffset: 0, duration: 2.6, stagger: .5, ease: 'power3.inOut' }, 0)
+        .from(tagCh, { opacity: 0, y: 14, filter: 'blur(6px)', duration: .9, stagger: .025, ease: 'power3.out' }, 1.2)
+        .from('.intro-since > *', { opacity: 0, y: 10, duration: .9, stagger: .12, ease: 'power3.out' }, 2.2)
+        .from('.intro-bar', { opacity: 0, duration: .6 }, .4);
+      gsap.to('.intro-ring', { rotate: 360, duration: 24, ease: 'none', repeat: -1 });
       const finish = () => {
         if (finished) return; finished = true;
         try { sessionStorage.setItem('dd-intro', '1'); } catch (e) {}
-        gsap.timeline({ onComplete: () => { done(); if (intro.progress() === 0) intro.play(); } })
-          .to('#skipIntro', { opacity: 0, duration: .3 })
-          .to('#loader', { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'expo.inOut' }, '<')
+        gsap.timeline({ onComplete: () => { cancelAnimationFrame(raf); done(); if (intro.progress() === 0) intro.play(); } })
+          .to('#skipIntro, .intro-tag, .intro-since, .intro-bar', { opacity: 0, y: -10, duration: .5, ease: 'power2.in' })
+          .to('.intro-stage', { scale: 1.08, opacity: 0, duration: .8, ease: 'power2.in' }, '<.1')
+          .to('#loader', { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'expo.inOut' }, '-=.35')
           .add(() => intro.play(), '<.4');
       };
       vid.addEventListener('ended', finish);
