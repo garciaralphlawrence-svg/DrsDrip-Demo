@@ -14,18 +14,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body class="is-loading">
 
 <!-- PRELOADER: the drip fills the screen -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-fill" id="loaderFill"></div>
-  <div class="loader-mark">
+<div class="loader" id="loader">
+  <video class="loader-video" id="introVid" muted playsinline preload="auto" aria-hidden="true" src="assets/video/intro.mp4"></video>
+  <button class="skip" id="skipIntro" type="button">Skip intro <span>→</span></button>
+  <div class="loader-fill" id="loaderFill" aria-hidden="true"></div>
+  <div class="loader-mark" aria-hidden="true">
     <img src="assets/logo.png" alt="" width="120" height="120" class="loader-logo">
     <p class="loader-sub"><span>The 1st IV Drip Lounge</span><span>in the Philippines</span></p>
   </div>
-  <div class="loader-drop"></div>
+  <div class="loader-drop" aria-hidden="true"></div>
 </div>
 
 <div class="grain" aria-hidden="true"></div>
@@ -441,6 +443,6 @@
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/SplitText.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="anim.js?v=7"></script>
+<script src="anim.js?v=8"></script>
 </body>
 </html>

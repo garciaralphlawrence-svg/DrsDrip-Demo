@@ -669,3 +669,13 @@ h2 em,h1 em{font-weight:300}
 @media (prefers-reduced-motion:reduce){.ripple{display:none}.hero-frame img.on{transform:none}}
 
 @media (min-width:681px){.cl4{margin-top:60px}.cl2{margin-top:60px}}
+
+/* ---------- video intro ---------- */
+.loader-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000}
+.loader.has-video{background:#000}
+.loader.has-video .loader-video{display:block}
+.loader.has-video .loader-fill,.loader.has-video .loader-mark,.loader.has-video .loader-drop{display:none}
+.skip{position:absolute;right:var(--pad);bottom:var(--pad);z-index:3;display:none;align-items:center;gap:10px;padding:12px 18px;border:1px solid rgba(239,226,196,.45);color:var(--ivory);font-size:11px;letter-spacing:.24em;text-transform:uppercase;border-radius:2px;background:rgba(6,42,33,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .3s,color .3s}
+.skip:hover{background:var(--ivory);color:var(--deep)}
+.loader.has-video .skip{display:inline-flex}
+@media (max-width:680px){.loader-video{object-fit:cover;object-position:50% 50%}}

@@ -51,7 +51,8 @@
       .from('.nav > *', { y: -20, opacity: 0, duration: 1, stagger: .05, ease: E2 }, 1)
       .add(() => { lenis && lenis.start(); ScrollTrigger.refresh(); }, 1.2);
 
-    const pre = gsap.timeline({ onComplete: () => { done(); if (intro.progress() === 0) intro.play(); } })
+    const runPre = () => {
+      const pre = gsap.timeline({ onComplete: () => { done(); if (intro.progress() === 0) intro.play(); } })
       .from('.loader-logo', { scale: .6, opacity: 0, duration: 1, ease: 'back.out(1.7)' })
       .from('.loader-sub span', { yPercent: 110, opacity: 0, duration: .9, stagger: .1, ease: E2 }, '<.3')
       .fromTo('.loader-drop', { y: -10, opacity: 0 }, { y: 200, opacity: 1, duration: .7, ease: 'power2.in', repeat: 1 }, '<.1')
@@ -59,7 +60,34 @@
       .to('.loader-mark', { y: -30, opacity: 0, duration: .55, ease: 'power3.in' }, '+=.1')
       .to('#loader', { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.1, ease: 'expo.inOut' }, '-=.1')
       .add(() => intro.play(), '<.35');
-    setTimeout(() => { if (document.body.contains(loader)) pre.progress(1); }, 6000);
+      setTimeout(() => { if (document.body.contains(loader)) pre.progress(1); }, 6000);
+    };
+
+    /* video intro: their 3D logo animation, once per session */
+    const vid = $('#introVid');
+    let seen = null; try { seen = sessionStorage.getItem('dd-intro'); } catch (e) {}
+    if (vid && !seen) {
+      loader.classList.add('has-video');
+      let finished = false;
+      const finish = () => {
+        if (finished) return; finished = true;
+        try { sessionStorage.setItem('dd-intro', '1'); } catch (e) {}
+        gsap.timeline({ onComplete: () => { done(); if (intro.progress() === 0) intro.play(); } })
+          .to('#skipIntro', { opacity: 0, duration: .3 })
+          .to('#loader', { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.2, ease: 'expo.inOut' }, '<')
+          .add(() => intro.play(), '<.4');
+      };
+      vid.addEventListener('ended', finish);
+      vid.addEventListener('timeupdate', () => { if (vid.duration && vid.currentTime > vid.duration - .25) finish(); });
+      $('#skipIntro').addEventListener('click', finish);
+      vid.addEventListener('error', () => { if (!finished) { finished = true; loader.classList.remove('has-video'); runPre(); } });
+      const p = vid.play();
+      if (p && p.catch) p.catch(() => { if (!finished) { finished = true; loader.classList.remove('has-video'); runPre(); } });
+      setTimeout(finish, 12000);
+    } else {
+      if (vid) vid.remove();
+      runPre();
+    }
 
     /* hero parallax out */
     gsap.to('.hero-visual', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
