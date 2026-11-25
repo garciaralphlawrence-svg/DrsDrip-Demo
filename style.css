@@ -1,11 +1,11 @@
 /* Drs'. Drip — v5 editorial motion build */
 :root{
   --green:#105c4a; --green2:#17755e; --deep:#0b3f33; --night:#062a21;
-  --ivory:#f6f1eb; --ivory2:#fbf7f1; --sand:#ece3d6; --gold:#a8843f; --gold2:#d6ba7f; --champ:#efe2c4; --mint:#a6dcc5;
+  --ivory:#f3ece1; --ivory2:#f7f2ea; --sand:#e9dfcf; --gold:#a8843f; --gold2:#d6ba7f; --champ:#efe2c4; --mint:#a6dcc5;
   --text:#22372e; --muted:#5d6e66; --line:rgba(11,63,51,.14);
   /* legacy aliases used by booking/chat */
   --ink:var(--deep); --ink2:var(--green); --cream:var(--ivory); --aqua:var(--green); --aqua2:var(--mint);
-  --serif:'Playfair Display',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
   --ease:cubic-bezier(.2,.7,.1,1); --pad:clamp(20px,4vw,56px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -591,3 +591,81 @@ form input:focus,form select:focus{border-color:var(--green)}
   .vphotos{width:min(300px,100%)}
   .visit-in{align-items:center}
 }
+
+/* ===================== v4: quiet luxury (XIGLO-level finish) ===================== */
+h1,h2,h3{font-weight:300;letter-spacing:-.01em}
+h2{font-size:clamp(46px,6vw,92px);line-height:1}
+h2 em,h1 em{font-weight:300}
+.body,.lead,.d-body>p:not(.d-num),.trow p,.branch p,.vsteps p{font-family:var(--serif);font-size:20px;line-height:1.55}
+.label{font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.grain{position:fixed;inset:0;z-index:65;pointer-events:none;opacity:.07;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ivline{display:none}
+/* buttons: square, quiet */
+.btn{border-radius:2px;padding:16px 26px;font-size:11px;letter-spacing:.22em}
+.btn-ivory{background:var(--ivory);color:var(--deep)}
+.btn-ivory::before{background:var(--gold2)}
+.nav-cta{padding:13px 20px}
+.trow button{border-radius:2px}
+.float-book{border-radius:2px}
+/* nav over dark hero */
+.nav:not(.solid){color:var(--ivory)}
+.nav:not(.solid) .nav-cta{background:var(--ivory);color:var(--deep)}
+.nav:not(.solid) .links i{color:var(--gold2)}
+/* hero */
+.hero{background:var(--deep);color:var(--ivory);padding:150px 0 130px;min-height:100svh}
+#liquid{position:absolute;inset:0;width:100%;height:100%;filter:blur(2px);transform-origin:70% 40%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,42,33,.35),transparent 30%,transparent 70%,rgba(6,42,33,.5));pointer-events:none}
+.hero-inner{z-index:2;grid-template-columns:1.25fr .75fr;gap:80px}
+.hero-kicker{color:var(--gold2);letter-spacing:.3em;font-size:11px}
+.hero-title{color:var(--ivory);font-size:clamp(58px,8vw,132px);line-height:.95;font-weight:300}
+.hero-title em{color:var(--gold2)}
+.hero .lead{color:#cfe2d9;max-width:470px}
+.hero-visual{width:min(400px,100%)}
+.hero-frame{position:relative;aspect-ratio:3/4;overflow:hidden;background:#e9e4dc;box-shadow:0 60px 100px -50px rgba(0,0,0,.7)}
+.hero-frame::after{content:"";position:absolute;inset:12px;border:1px solid rgba(239,226,196,.55);pointer-events:none;z-index:2}
+.hero-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;opacity:0;transform:scale(1.12);transition:opacity 1.4s ease,transform 6s linear}
+.hero-frame img.on{opacity:1;transform:scale(1)}
+.hero-cap{margin-top:18px;display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#cfe2d9;text-align:left}
+.hero-cap i{flex:0 0 40px;height:1px;background:var(--gold2)}
+.hero-cap span:first-child{font-family:var(--serif);font-size:22px;letter-spacing:0;color:var(--gold2)}
+.hero-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:30px;z-index:2;display:flex;justify-content:space-between;gap:20px;padding-top:18px;border-top:1px solid rgba(239,226,196,.18);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:#a9c8bb}
+/* falling drop + ripples */
+.ripple{position:absolute;left:52%;top:0;bottom:22%;width:0;z-index:1;pointer-events:none}
+.ripple .fall{position:absolute;left:-5px;top:-20px;width:10px;height:14px;background:var(--gold2);clip-path:path('M5 0 C5 0 0 6 0 9 A5 5 0 0 0 10 9 C10 6 5 0 5 0z');animation:dropfall 7s cubic-bezier(.55,0,1,.45) infinite}
+@keyframes dropfall{0%{transform:translateY(0);opacity:0}6%{opacity:1}24%{transform:translateY(calc(78svh - 40px));opacity:1}25%,100%{transform:translateY(calc(78svh - 40px));opacity:0}}
+.ripple b{position:absolute;left:-120px;bottom:0;width:240px;height:240px;border:1px solid var(--gold2);border-radius:50%;transform:scale(0,0);opacity:0;animation:ring2 7s ease-out infinite}
+.ripple b:nth-of-type(2){animation-delay:.35s}.ripple b:nth-of-type(3){animation-delay:.7s}
+@keyframes ring2{0%,24%{transform:scale(0,0);opacity:0}25%{transform:scale(.05,.015);opacity:.9}60%{transform:scale(1.4,.4);opacity:0}100%{opacity:0}}
+/* band: hairline, on paper */
+.band{background:var(--ivory2);color:var(--green);border-block:1px solid var(--line);padding:22px 0}
+.band-track span{font-weight:300}
+.band-track i{color:var(--gold)}
+/* chat fab: calm */
+.fab-face{animation:none}
+.fab-ping{display:none}
+.fab-tip{animation:none;opacity:0;transition:opacity .3s}
+.chat-fab:hover .fab-tip{opacity:1}
+/* collage aspect for new images */
+.cl1 .cl-img{aspect-ratio:4/5}.cl1 img{object-position:30% 20%}
+.cl3 .cl-img{aspect-ratio:4/3}
+/* drip panels on paper */
+.d-panel{border-radius:2px}
+.d-body h3{font-weight:300}
+.vs-card,.edit{border-radius:4px}
+@media (max-width:1024px){
+  .hero{padding:120px 0 120px}
+  .hero-inner{grid-template-columns:1fr;gap:56px}
+  .hero-visual{justify-self:start;width:min(340px,86%)}
+  .ripple{left:80%}
+  .hero-foot span:nth-child(3){display:none}
+}
+@media (max-width:680px){
+  .hero-title{font-size:clamp(50px,14vw,72px)}
+  .hero-foot{flex-direction:column;gap:6px;bottom:24px}
+  .hero-foot span:nth-child(2){display:none}
+  .hero{padding-bottom:110px}
+  .body,.lead,.d-body>p:not(.d-num),.trow p,.branch p,.vsteps p{font-size:18.5px}
+}
+@media (prefers-reduced-motion:reduce){.ripple{display:none}.hero-frame img.on{transform:none}}
+
+@media (min-width:681px){.cl4{margin-top:60px}.cl2{margin-top:60px}}

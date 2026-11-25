@@ -91,7 +91,46 @@
   burger.addEventListener('click', () => setMenu(!links.classList.contains('open')));
   $$('.links a, .links button').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
-  /* ---------- Hero bubbles ---------- */
+  /* ---------- Hero: liquid light ---------- */
+  const lq = $('#liquid');
+  if (lq) {
+    const ctx = lq.getContext('2d'); let W, H; const S = 6;
+    const size = () => { W = Math.ceil(lq.clientWidth / S); H = Math.ceil(lq.clientHeight / S); lq.width = W; lq.height = H; };
+    size(); addEventListener('resize', size);
+    const blobs = [
+      { c: '23,117,94', a: .7, r: .55, x: .78, y: .3, sx: .00011, sy: .00015, p: 0 },
+      { c: '214,186,127', a: .34, r: .38, x: .62, y: .7, sx: .00013, sy: .0001, p: 2 },
+      { c: '166,220,197', a: .16, r: .42, x: .2, y: .2, sx: .00009, sy: .00012, p: 4 },
+      { c: '6,42,33', a: .9, r: .5, x: .1, y: .9, sx: .0001, sy: .00008, p: 1 },
+      { c: '239,226,196', a: .14, r: .25, x: .85, y: .85, sx: .00016, sy: .00011, p: 3 }
+    ];
+    let mx = .5, my = .5, vis = true;
+    $('.hero').addEventListener('pointermove', e => { mx = e.clientX / innerWidth; my = e.clientY / innerHeight; });
+    new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(lq);
+    const draw = t => {
+      ctx.fillStyle = '#0b3f33'; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+      for (const b of blobs) {
+        const x = (b.x + Math.sin(t * b.sx * 6 + b.p) * .14 + (mx - .5) * .05) * W, y = (b.y + Math.cos(t * b.sy * 6 + b.p) * .14 + (my - .5) * .05) * H, r = b.r * Math.max(W, H);
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, `rgba(${b.c},${b.a})`); g.addColorStop(1, `rgba(${b.c},0)`);
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    };
+    if (reduce) draw(0); else (function tick(t) { if (vis) draw(t); requestAnimationFrame(tick); })(0);
+  }
+  /* hero portrait slideshow */
+  const slides = $$('#heroMedia img'), caps = ['Your ₱30K Anniversary Edit', 'Youthful Radiance', 'NAD Ultimate Drip', 'Regen C Cellular Renewal'];
+  if (slides.length > 1 && !reduce) {
+    let si = 0;
+    setInterval(() => {
+      slides[si].classList.remove('on'); si = (si + 1) % slides.length; slides[si].classList.add('on');
+      $('#heroCapN').textContent = String(si + 1).padStart(2, '0'); $('#heroCapT').textContent = caps[si];
+    }, 4200);
+  }
+
+  /* ---------- Hero bubbles (unused) ---------- */
   const cv = $('#bubbles');
   if (cv && !reduce) {
     const ctx = cv.getContext('2d'); let W, H; const bs = [];

@@ -13,8 +13,8 @@
 <meta property="og:image" content="assets/img/team.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body class="is-loading">
 
@@ -28,6 +28,7 @@
   <div class="loader-drop"></div>
 </div>
 
+<div class="grain" aria-hidden="true"></div>
 <div class="ivline" aria-hidden="true"><span class="ivfill"></span><span class="ivdrop"></span></div>
 
 <header class="nav" id="nav">
@@ -51,31 +52,33 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <canvas id="liquid" aria-hidden="true"></canvas>
+  <div class="ripple" aria-hidden="true"><i class="fall"></i><b></b><b></b><b></b></div>
   <div class="hero-inner">
     <div class="hero-copy">
-      <p class="kicker hero-kicker"><span>The 1st IV Drip Lounge in the Philippines</span></p>
+      <p class="kicker hero-kicker"><span>Physician-led</span><span>·</span><span>IV therapy</span><span>·</span><span>Since 2013</span></p>
       <h1 class="hero-title" id="heroTitle">
         <span class="ln">13 years of trust,</span>
         <span class="ln">wellness that</span>
         <span class="ln"><em>lasts.</em></span>
       </h1>
-      <p class="lead hero-lede">IV drips, skin and body treatments, and a doctor who sees you first. Drop by our lounges on Timog Avenue, Capitol Hills and SOHO Central.</p>
+      <p class="lead hero-lede">The first IV drip lounge in the Philippines. Drips, skin and body care, always with a doctor's assessment first.</p>
       <div class="hero-ctas hero-cta">
-        <button class="btn btn-solid magnetic" data-book><span class="btn-t">Book a visit</span><span class="arr">→</span></button>
-        <button class="btn btn-line magnetic" data-chat><span class="btn-t">Ask Dr. Drip</span></button>
+        <button class="btn btn-ivory magnetic" data-book><span class="btn-t">Book a visit</span><span class="arr">→</span></button>
+        <button class="btn btn-line light magnetic" data-chat><span class="btn-t">Ask Dr. Drip</span></button>
       </div>
-      <p class="hero-note hero-bar">Open Tuesday to Sunday · <a href="tel:+639178964599">0917 896 4599</a></p>
     </div>
-
     <div class="hero-visual">
-      <div class="hero-arch" id="heroMedia">
-        <img src="assets/img/c-reception.webp" alt="The Drs'. Drip reception with its green logo wall" width="540" height="691">
+      <div class="hero-frame" id="heroMedia">
+        <img src="assets/img/m-30k.webp" alt="A Drs'. Drip model with glowing skin" class="on" width="377" height="396">
+        <img src="assets/img/m-youthful.webp" alt="" width="222" height="437">
+        <img src="assets/img/m-nad.webp" alt="" width="227" height="437">
+        <img src="assets/img/m-regenc.webp" alt="" width="213" height="401">
       </div>
-      <figure class="mark"><img src="assets/img/mark-13.webp" alt="Drs'. Drip 13 years anniversary: 13 years of trust, wellness that lasts" width="380" height="490"></figure>
-      <p class="hero-cap">Our Timog Avenue lounge</p>
+      <p class="hero-cap"><span id="heroCapN">01</span><i></i><span id="heroCapT">Your ₱30K Anniversary Edit</span></p>
     </div>
   </div>
-  <a href="#story" class="scroll-cue" aria-label="Scroll down"><i></i></a>
+  <div class="hero-foot hero-bar"><span>The 1st IV Drip Lounge in the Philippines</span><span>Timog · Capitol Hills · SOHO Central</span><span>Tue–Sun · 0917 896 4599</span></div>
 </section>
 
 <!-- VELOCITY MARQUEE -->
@@ -187,10 +190,10 @@
         <p class="label light">Your first visit</p>
         <h2 class="split">It starts with <em>understanding you.</em></h2>
         <div class="vphotos" aria-hidden="true">
-          <img src="assets/img/c-frontdesk.webp" alt="" class="on">
+          <img src="assets/img/c-storefront.webp" alt="" class="on">
           <img src="assets/img/doctor-consult.webp" alt="">
           <img src="assets/img/c-ivnurse.webp" alt="">
-          <img src="assets/img/p-specials.webp" alt="">
+          <img src="assets/img/m-specials.webp" alt="">
         </div>
       </div>
       <ol class="vsteps" id="vsteps">
@@ -296,9 +299,9 @@
     <p class="body fade-up">Green walls, comfy chairs and nurses who check on you the whole time. Bring a book, or just nap.</p>
   </div>
   <div class="wrap collage">
-    <figure class="cl cl1" data-speed=".12"><div class="cl-img"><img src="assets/img/c-frontdesk.webp" alt="Guests at the Drs'. Drip front desk" loading="lazy"></div><figcaption><b>Front desk</b>Warm welcome, every visit</figcaption></figure>
+    <figure class="cl cl1" data-speed=".12"><div class="cl-img"><img src="assets/img/doctor-consult.webp" alt="A Drs'. Drip doctor consulting with a guest" loading="lazy"></div><figcaption><b>Physician-led</b>Every visit starts with a consult</figcaption></figure>
     <figure class="cl cl2" data-speed="-.08"><div class="cl-img"><img src="assets/img/c-ivnurse.webp" alt="A nurse preparing a guest's IV drip" loading="lazy"></div><figcaption><b>Infusion bar</b>Nurses run every drip</figcaption></figure>
-    <figure class="cl cl3" data-speed=".2"><div class="cl-img"><img src="assets/img/doctor-consult.webp" alt="A doctor consulting with a guest" loading="lazy"></div><figcaption><b>Physician-led</b>It starts with understanding you</figcaption></figure>
+    <figure class="cl cl3" data-speed=".2"><div class="cl-img"><img src="assets/img/m-specials.webp" alt="Four Drs'. Drip models for the anniversary specials" loading="lazy"></div><figcaption><b>The Drs'. Drip glow</b>Thirteenth Edition</figcaption></figure>
     <figure class="cl cl4" data-speed="-.04"><div class="cl-img"><img src="assets/img/c-storefront.webp" alt="Drs'. Drip Lounge storefront on Timog Avenue" loading="lazy"></div><figcaption><b>Timog Avenue</b>Main branch, Quezon City</figcaption></figure>
   </div>
 </section>
@@ -433,11 +436,11 @@
   </div>
 </div>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=7"></script>
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/SplitText.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="anim.js?v=6"></script>
+<script src="anim.js?v=7"></script>
 </body>
 </html>

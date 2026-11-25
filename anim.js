@@ -41,16 +41,14 @@
     /* ---------- preloader → hero intro ---------- */
     $$('#heroTitle .ln').forEach(l => { const s = document.createElement('span'); s.innerHTML = l.innerHTML; l.innerHTML = ''; l.appendChild(s); });
     const intro = gsap.timeline({ paused: true })
-      .fromTo('#heroMedia', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' }, 0)
-      .from('#heroMedia img', { scale: 1.45, duration: 2.4, ease: E2 }, 0)
+      .fromTo('#heroMedia', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.7, ease: 'expo.inOut' }, .2)
+      .from('#liquid', { opacity: 0, scale: 1.2, duration: 2.4, ease: 'power2.out' }, 0)
       .from($$('#heroTitle .ln > span'), { yPercent: 115, rotate: 3, duration: 1.4, stagger: .1, ease: E2 }, .5)
       .from('.hero-kicker span', { y: 20, opacity: 0, duration: 1, stagger: .08, ease: E2 }, .7)
       .from('.hero-lede, .hero-cta > *', { y: 26, opacity: 0, duration: 1.1, stagger: .08, ease: E2 }, .95)
-      .from('.hero-bar', { y: 20, opacity: 0, duration: 1, ease: E2 }, 1.15)
-      .from('.mark', { y: 60, opacity: 0, rotate: -6, duration: 1.4, ease: E2 }, 1)
+      .from('.hero-bar span', { y: 16, opacity: 0, duration: 1, stagger: .08, ease: E2 }, 1.15)
       .from('.hero-cap', { opacity: 0, duration: 1 }, 1.4)
       .from('.nav > *', { y: -20, opacity: 0, duration: 1, stagger: .05, ease: E2 }, 1)
-      .from('.scroll-cue', { opacity: 0, duration: 1 }, 1.4)
       .add(() => { lenis && lenis.start(); ScrollTrigger.refresh(); }, 1.2);
 
     const pre = gsap.timeline({ onComplete: () => { done(); if (intro.progress() === 0) intro.play(); } })
