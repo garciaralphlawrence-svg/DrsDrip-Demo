@@ -38,32 +38,34 @@
   }
   function fmtH(h) { const hh = Math.floor(h), mm = Math.round((h - hh) * 60); return ((hh + 11) % 12 + 1) + (mm ? ':' + String(mm).padStart(2, '0') : '') + (hh < 12 ? 'am' : 'pm'); }
 
-  /* ---------- Headline split ---------- */
-  $$('.split').forEach(el => {
-    const words = el.innerHTML.split(/\s+|&nbsp;/).filter(Boolean);
-    el.innerHTML = words.map((w, i) => `<span class="w"><span style="transition-delay:${0.15 + i * 0.08}s">${w === 'first' ? '<em>first</em>' : w}</span></span>`).join(' ');
-    setTimeout(() => el.classList.add('in'), 140);
+  /* ---------- IV bag SVGs ---------- */
+  $$('.dbag').forEach(el => {
+    const { c1, c2, label = '', id } = el.dataset;
+    const body = 'M50 50h100a18 18 0 0 1 18 18v170a36 36 0 0 1-36 36H68a36 36 0 0 1-36-36V68a18 18 0 0 1 18-18z';
+    const wave = 'M-100 0q25-9 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0v260h-400z';
+    el.innerHTML = `<svg viewBox="0 0 200 380" aria-hidden="true">
+      <defs><linearGradient id="g${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient><clipPath id="k${id}"><path d="${body}"/></clipPath></defs>
+      <path d="M100 2v28" class="bs"/><circle cx="100" cy="38" r="7" class="bs"/>
+      <g clip-path="url(#k${id})"><rect x="20" y="40" width="160" height="260" class="bglass"/>
+        <g class="liq" style="transform:translateY(120px)"><g transform="translate(0 6)"><path class="wv wv2" d="${wave}" fill="url(#g${id})"/></g><path class="wv" d="${wave}" fill="url(#g${id})"/></g>
+        <circle class="bub" cx="80" cy="250" r="3"/><circle class="bub" cx="118" cy="258" r="2.2"/><circle class="bub" cx="132" cy="246" r="2.6"/>
+      </g>
+      <path d="${body}" class="bs"/>
+      <path d="M60 86v130" class="shine"/>
+      <g class="grad"><path d="M168 100h-14"/><path d="M168 130h-8"/><path d="M168 160h-14"/><path d="M168 190h-8"/><path d="M168 220h-14"/></g>
+      <text x="100" y="80" text-anchor="middle" class="blabel">${esc(label)}</text>
+      <rect x="88" y="276" width="24" height="22" rx="4" class="bs"/>
+      <rect x="92" y="298" width="16" height="38" rx="4" class="bs"/>
+      <circle class="cdrop" cx="100" cy="304" r="3" fill="${c2}"/>
+      <path d="M100 336V380" class="bs tube"/>
+    </svg>`;
   });
 
-  /* ---------- Reveal + counters ---------- */
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach((el, i) => { el.style.transitionDelay = ((i % 4) * 0.08) + 's'; io.observe(el); });
-  function countUp(el, end, fmt, dur = 1600) {
-    if (reduce) { el.textContent = fmt(end); return; }
-    const t0 = performance.now();
-    (function f(t) { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(end * e); if (k < 1) requestAnimationFrame(f); })(t0);
-  }
-  const cio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return; cio.unobserve(e.target); const el = e.target;
-    if (el.dataset.count) countUp(el, +el.dataset.count, v => Math.round(v) + (el.dataset.suffix || ''));
-    if (el.dataset.amt) countUp(el, +el.dataset.amt, peso, 1800);
-    if (el.id === 'ringFill') el.style.strokeDashoffset = 326.7 * (1 - 0.94);
-  }), { threshold: 0.5 });
-  $$('[data-count],[data-amt],#ringFill').forEach(el => cio.observe(el));
+  /* ---------- Final values (motion layer animates from zero) ---------- */
+  $$('[data-amt]').forEach(el => el.textContent = peso(+el.dataset.amt));
 
   /* ---------- Scroll effects ---------- */
   const nav = $('#nav'), fill = $('.ivfill'), drop = $('.ivdrop'), fb = $('.float-book');
-  const steps = $$('.steps li'), path = $('#stepPath'), stepsBox = $('.steps');
   const secs = $$('main section[id]'), navLinks = $$('.links a');
   function onScroll() {
     const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
@@ -72,18 +74,20 @@
     const p = Math.min(1, y / h);
     fill.style.height = (p * 100) + '%';
     drop.style.transform = `translateY(${p * fill.parentElement.clientHeight - 6}px)`;
-    const r = stepsBox.getBoundingClientRect();
-    const sp = Math.max(0, Math.min(1, (innerHeight * 0.65 - r.top) / r.height));
-    path.style.strokeDashoffset = 600 - sp * 600;
-    steps.forEach(li => li.classList.toggle('lit', li.getBoundingClientRect().top < innerHeight * 0.65));
     let cur = ''; secs.forEach(s => { if (s.getBoundingClientRect().top < innerHeight * 0.4) cur = s.id; });
     navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur));
   }
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const goTo = sel => { const t = $(sel); if (!t) return; window.__lenis ? window.__lenis.scrollTo(t, { offset: -60, duration: 1.4 }) : t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
+  window.__goTo = goTo;
 
   /* ---------- Mobile menu ---------- */
   const burger = $('#burger'), links = $('#links');
-  const setMenu = open => { links.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); document.body.style.overflow = open ? 'hidden' : ''; };
+  const setMenu = open => {
+    links.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (window.__lenis) open ? window.__lenis.stop() : window.__lenis.start();
+  };
   burger.addEventListener('click', () => setMenu(!links.classList.contains('open')));
   $$('.links a, .links button').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
@@ -93,7 +97,7 @@
     const ctx = cv.getContext('2d'); let W, H; const bs = [];
     const size = () => { const d = Math.min(2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
     size(); addEventListener('resize', size);
-    for (let i = 0; i < (innerWidth < 640 ? 26 : 55); i++) bs.push({ x: Math.random() * W, y: Math.random() * H, r: 1 + Math.random() * 4, s: .15 + Math.random() * .5, w: Math.random() * 6.28, a: .08 + Math.random() * .25 });
+    for (let i = 0; i < (innerWidth < 640 ? 22 : 46); i++) bs.push({ x: Math.random() * W, y: Math.random() * H, r: 1.5 + Math.random() * 5, s: .15 + Math.random() * .45, w: Math.random() * 6.28, a: .12 + Math.random() * .3, g: Math.random() < .35 });
     let mx = -999, my = -999, vis = true;
     cv.parentElement.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
     new IntersectionObserver(([e]) => vis = e.isIntersecting).observe(cv);
@@ -103,41 +107,17 @@
         for (const b of bs) {
           b.y -= b.s; b.w += .01; b.x += Math.sin(b.w) * .3;
           const dx = b.x - mx, dy = b.y - my, d = Math.hypot(dx, dy);
-          if (d < 110 && d > 0) { b.x += dx / d * 1.6; b.y += dy / d * 1.6; }
+          if (d < 120 && d > 0) { b.x += dx / d * 1.8; b.y += dy / d * 1.8; }
           if (b.y < -10) { b.y = H + 10; b.x = Math.random() * W; }
+          const c = b.g ? '168,132,63' : '16,92,74';
           ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.28);
-          ctx.strokeStyle = `rgba(243,227,181,${b.a})`; ctx.lineWidth = 1; ctx.stroke();
-          ctx.fillStyle = `rgba(243,227,181,${b.a * .25})`; ctx.fill();
+          ctx.strokeStyle = `rgba(${c},${b.a})`; ctx.lineWidth = 1; ctx.stroke();
+          ctx.fillStyle = `rgba(${c},${b.a * .18})`; ctx.fill();
         }
       }
       requestAnimationFrame(tick);
     })();
   }
-
-  /* ---------- Pointer motion ---------- */
-  if (!reduce && fine) {
-    const stage = $('.bag-stage');
-    $('.hero').addEventListener('pointermove', e => {
-      const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
-      stage.style.translate = `${x * -24}px ${y * -18}px`;
-      $$('.chip').forEach((c, i) => c.style.translate = `${x * (14 + i * 8)}px ${y * (10 + i * 6)}px`);
-    });
-    $$('.magnet').forEach(b => {
-      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px,${(e.clientY - r.top - r.height / 2) * .3}px)`; });
-      b.addEventListener('pointerleave', () => b.style.transform = '');
-    });
-    $$('.tilt').forEach(t => {
-      t.addEventListener('pointermove', e => { const r = t.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; t.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`; });
-      t.addEventListener('pointerleave', () => t.style.transform = '');
-    });
-  }
-
-  /* ---------- Drip rail ---------- */
-  const rail = $('#rail'), bar = $('#railbar');
-  const upd = () => { const max = rail.scrollWidth - rail.clientWidth; const w = rail.clientWidth / rail.scrollWidth * 100; bar.style.width = w + '%'; bar.style.left = (max ? rail.scrollLeft / max : 0) * (100 - w) + '%'; };
-  rail.addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
-  $('#prev').onclick = () => rail.scrollBy({ left: -344, behavior: 'smooth' });
-  $('#next').onclick = () => rail.scrollBy({ left: 344, behavior: 'smooth' });
 
   /* ---------- Treatment tabs ---------- */
   const ink = $('.tab-ink');
@@ -146,6 +126,8 @@
     $$('.tab').forEach(x => { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', x === t); });
     $$('.tpanel').forEach(p => { const on = p.dataset.panel === t.dataset.tab; p.hidden = !on; p.classList.toggle('on', on); });
     moveInk(t);
+    window.__animRows && window.__animRows($(`.tpanel[data-panel="${t.dataset.tab}"]`));
+    window.ScrollTrigger && ScrollTrigger.refresh();
   }));
   requestAnimationFrame(() => moveInk($('.tab.on'))); addEventListener('resize', () => moveInk($('.tab.on')));
 
@@ -164,7 +146,7 @@
   function renderBranches(sel = 'timog') {
     $('#branchList').innerHTML = BRANCHES.map(b => {
       const st = status(b);
-      return `<div class="branch reveal in ${b.id === sel ? 'on' : ''}" data-b="${b.id}" role="button" tabindex="0" aria-pressed="${b.id === sel}">
+      return `<div class="branch ${b.id === sel ? 'on' : ''}" data-b="${b.id}" role="button" tabindex="0" aria-pressed="${b.id === sel}">
         <h3>${b.name} <span class="status ${st.open ? 'open' : ''}"><i></i>${st.text}</span></h3>
         <p>${b.addr}</p>
         <div class="meta"><span>Tue–Sun · ${fmtH(b.open)}–${fmtH(b.close)}</span>${b.phones.map(p => `<a href="tel:${p.replace(/[^0-9+]/g, '')}">${p}</a>`).join('')}</div>
@@ -181,8 +163,8 @@
 
   /* ---------- Modal helpers ---------- */
   let lastFocus;
-  function openModal(m) { lastFocus = document.activeElement; m.hidden = false; document.body.style.overflow = 'hidden'; }
-  function closeModal(m) { m.hidden = true; document.body.style.overflow = ''; lastFocus && lastFocus.focus && lastFocus.focus(); }
+  function openModal(m) { lastFocus = document.activeElement; m.hidden = false; document.body.style.overflow = 'hidden'; window.__lenis && window.__lenis.stop(); }
+  function closeModal(m) { m.hidden = true; document.body.style.overflow = ''; window.__lenis && window.__lenis.start(); lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true }); }
   document.addEventListener('keydown', e => {
     const m = $$('.modal').find(x => !x.hidden);
     if (m) {
@@ -349,7 +331,7 @@
       const a = document.createElement('div'); a.className = 'acts';
       acts.forEach(x => {
         if (x.href) a.insertAdjacentHTML('beforeend', `<a href="${x.href}" target="_blank" rel="noopener">${x.t}</a>`);
-        else if (x.go) { const b = document.createElement('button'); b.textContent = x.t; b.onclick = () => { closeChat(); document.querySelector(x.go).scrollIntoView({ behavior: 'smooth' }); }; a.append(b); }
+        else if (x.go) { const b = document.createElement('button'); b.textContent = x.t; b.onclick = () => { closeChat(); goTo(x.go); }; a.append(b); }
         else a.insertAdjacentHTML('beforeend', `<button data-book data-pick="${esc(x.book)}">${x.t}</button>`);
       });
       d.append(a);
